@@ -1,0 +1,35 @@
+# 1. ACQUISITION ET TRAITEMENT DES DONNEES
+
+import pandas as pd
+
+# Sélection des colonnes essentielles pour l'analyse
+keep_cols = ['Date mutation', 'Nature mutation', 'Valeur fonciere', 'Code postal', 'Commune', 'Type local',
+             'Surface reelle bati', 'Nombre pieces principales', 'Code departement']
+
+# Chargement optimisé (le séparateur DVF est '|')
+df = pd.read_csv('D:/DOSSIERS LOVA/PROJET DATA ANALYSIS/valeursfoncieres-2025-s1.txt/ValeursFoncieres-2025-S1.txt',
+                 sep='|', usecols=keep_cols, low_memory=False)
+
+# Nettoyage des types et formats
+# Conversion de la valeur foncière (remplacement de la virgule par le point)
+df['Valeur fonciere'] = df['Valeur fonciere'].str.replace(',', '.').astype(float)
+df['Date mutation'] = pd.to_datetime(df['Date mutation'], dayfirst=True)
+
+# Filtrage
+# On ne garde que les ventes classiques de maisons ou appartements
+df = df[df['Nature mutation'] == 'Vente']
+df = df[df['Type local'].isin(['Maison', 'Appartement'])]
+
+# Supprimer les lignes sans prix ou sans surface (inexploitables)
+df = df.dropna(subset=['Valeur fonciere', 'Surface reelle bati'])
+df = df[df['Surface reelle bati'] > 0]
+
+# Création du KPI "Prix au m²"
+df['prix_m2'] = df['Valeur fonciere'] / df['Surface reelle bati']
+
+# Suppression des valeurs aberrantes (Outliers)
+# Exemple : exclure les prix/m2 inférieurs à 500€ ou supérieurs à 25 000€
+df = df[(df['prix_m2'] >= 500) & (df['prix_m2'] <= 25000)]
+
+print(f"Nettoyage terminé. Nombre de lignes restantes : {len(df)}")
+print(df)
