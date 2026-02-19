@@ -22,7 +22,8 @@ Ce projet consiste en une analyse de bout en bout des transactions immobilières
 La carte permet d'identifier visuellement les quartiers où la demande est la plus forte. 
 <img width="1365" height="634" alt="image" src="https://github.com/user-attachments/assets/41cd42aa-0a78-46b5-b2eb-6e7de2f075ab" />
 
-Interprétation des Résultats (Insights)
+🔍 Interprétation des Résultats (Insights)
+
 1. Concentration des prix (L'Analyse de l'Histogramme)
 "La distribution des prix au 
  montre une forte concentration autour de la médiane de [Insérez votre chiffre] €. On observe une 'longue traîne' vers la droite, indiquant un segment de marché 'Luxe' minoritaire mais bien présent, avec des biens dépassant les 15 000 €/
