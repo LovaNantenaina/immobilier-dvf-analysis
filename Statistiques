@@ -1,0 +1,44 @@
+# Acquisition des données DVF 2025
+import pandas as pd
+df = pd.read_csv('D:/DOSSIERS LOVA/PROJET DATA ANALYSIS/dvf_2025_propre_enriched.csv', sep=';', low_memory=False)
+
+# Import Seaborn
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Configuration du style des graphiques
+sns.set_theme(style="whitegrid")
+plt.figure(figsize=(15, 10))
+
+# Top 10 des villes les plus chères (Prix moyen au m²)
+plt.subplot(2, 2, 1)
+top_villes = df.groupby('Commune')['prix_m2'].mean().sort_values(ascending=False).head(10)
+sns.barplot(x=top_villes.values, y=top_villes.index, palette='viridis', hue=top_villes.index, legend=False)
+plt.title('Top 10 des villes les plus chères (Prix au m²)', fontsize=14)
+plt.xlabel('Prix moyen au m² (€)')
+
+# Relation Surface vs Valeur Foncière (Corrélation)
+plt.subplot(2, 2, 2)
+# On limite à 200m2 et 1M€ pour éviter que les châteaux n'écrasent le graphique
+mask = df[(df['Surface reelle bati'] < 200) & (df['Valeur fonciere'] < 1000000)]
+sns.scatterplot(data=mask, x='Surface reelle bati', y='Valeur fonciere', alpha=0.5, hue='Type local')
+plt.title('Relation Surface vs Prix (Ventes < 1M€)', fontsize=14)
+plt.xlabel('Surface (m²)')
+plt.ylabel('Prix de vente (€)')
+
+# Distribution des prix au m² (Histogramme)
+plt.subplot(2, 1, 2)
+sns.histplot(df['prix_m2'], bins=50, kde=True, color='skyblue')
+plt.axvline(df['prix_m2'].median(), color='red', linestyle='--', label=f"Médiane: {df['prix_m2'].median():.0f}€")
+plt.title('Distribution des prix au m² dans le département', fontsize=14)
+plt.xlabel('Prix au m² (€)')
+plt.legend()
+
+plt.tight_layout()
+plt.savefig('D:/DOSSIERS LOVA/PROJET DATA ANALYSIS/stats_immobilier.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+
+
+
+
