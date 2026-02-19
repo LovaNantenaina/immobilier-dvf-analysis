@@ -1,0 +1,43 @@
+# 2. ENRICHISSEMENT DES DONNEES AVEC DES COORDONNEES GPS
+
+# Charger vos données DVF nettoyées
+df_dvf = pd.read_csv('D:/DOSSIERS LOVA/PROJET DATA ANALYSIS/valeursfoncieres-2025-s1.txt/dvf_2025_propre.csv', sep=',',
+                     low_memory=False)
+
+# Charger le référentiel GPS (disponible sur data.gouv.fr)
+# Ce fichier contient généralement : Code Postal, Nom Commune, Latitude, Longitude
+ref_gps = pd.read_csv('D:/DOSSIERS LOVA/PROJET DATA ANALYSIS/Code_Postal_GPS.csv', sep=';')
+
+# On ne garde que les colonnes utiles du référentiel
+ref_gps = ref_gps[['code_postal', 'latitude', 'longitude']]
+
+# Fusionner (Merge) pour ajouter le GPS à chaque vente immobilière
+df_enriched = pd.merge(df_dvf, ref_gps, left_on='Code postal', right_on='code_postal', how='left')
+
+# Supprimer la colonne en double
+df_enriched.drop('code_postal', axis=1, inplace=True)
+
+print(f"Données enrichies ! Colonnes actuelles : {df_enriched.columns.tolist()}")
+df_enriched.to_csv('D:/DOSSIERS LOVA/PROJET DATA ANALYSIS/dvf_2025_propre_enriched.csv', index=False)
+
+# 3. VISUALISATION AVEC FOLIUM (CARTE HEATMAP DES PRIX IMMOBILIERS)
+import folium
+from folium.plugins import HeatMap
+
+# Créer une carte centrée sur la France
+m = folium.Map(location=[46.2276, 2.2137], zoom_start=6, tiles='cartodbpositron')
+
+# Préparer les données pour la HeatMap
+# On utilise [lat, lon, poids] où poids = prix_m2 normalisé
+# On supprime les lignes sans coordonnées pour éviter les erreurs
+df_map = df_enriched.dropna(subset=['latitude', 'longitude', 'prix_m2'])
+
+# Limiter à 50 000 points pour la fluidité du navigateur
+data_points = df_map[['latitude', 'longitude', 'prix_m2']].head(50000).values.tolist()
+
+# Ajouter la couche de chaleur
+HeatMap(data_points, radius=15, blur=10, max_zoom=1).add_to(m)
+
+# Sauvegarder en HTML (facile à partager ou intégrer)
+m.save('D:/DOSSIERS LOVA/PROJET DATA ANALYSIS/carte_prix_immobilier_2025.html')
+print("La carte a été générée : carte_prix_immobilier_2025.html")
