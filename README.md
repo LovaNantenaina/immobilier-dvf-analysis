@@ -22,7 +22,9 @@ Ce projet consiste en une analyse de bout en bout des transactions immobilières
 La carte permet d'identifier visuellement les quartiers où la demande est la plus forte. 
 
 
-![Analyse Statistique du Marché Immobilier](stats_immobilier.png)
+
 ## 🔮 Prochaines Étapes
 - [ ] Entraînement d'un modèle de régression pour prédire le prix d'un bien.
 - [ ] Création d'un dashboard interactif avec [Streamlit](https://streamlit.io).
+
+
