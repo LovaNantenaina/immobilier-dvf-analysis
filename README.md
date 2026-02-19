@@ -6,7 +6,7 @@ Ce projet consiste en une analyse de bout en bout des transactions immobilières
 
 ## 🛠️ Compétences Techniques
 - **Langage :** Python 3.x
-- **Librairies :** [Pandas](https://pandas.pydata.org) (Data Cleaning), [Folium](https://python-visualization.github.io) (Cartographie), [Numpy](https://numpy.org)
+- **Librairies :** [Pandas](https://pandas.pydata.org) (Data Cleaning), [Folium](https://python-visualization.github.io) (Cartographie), [Numpy](https://numpy.org), [Seaborn]
 - **Données :** [DVF (Demandes de Valeurs Foncières)](https://www.data.gouv.fr) - Source officielle Etalab.
 - **Géocodage :** Utilisation de l'[API Adresse](https://adresse.data.gouv.fr) pour la conversion des adresses en coordonnées GPS.
 
