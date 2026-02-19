@@ -20,6 +20,11 @@ Ce projet consiste en une analyse de bout en bout des transactions immobilières
 
 ## 📊 Résultats
 La carte permet d'identifier visuellement les quartiers où la demande est la plus forte. 
+<img width="1365" height="634" alt="image" src="https://github.com/user-attachments/assets/41cd42aa-0a78-46b5-b2eb-6e7de2f075ab" />
+
+
+
+
 
 
 
