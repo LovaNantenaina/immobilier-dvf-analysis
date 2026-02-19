@@ -21,6 +21,17 @@ Ce projet consiste en une analyse de bout en bout des transactions immobilières
 ## 📊 Résultats
 La carte permet d'identifier visuellement les quartiers où la demande est la plus forte. 
 
+🔍 Interprétation des Résultats (Insights)
+1. Concentration des prix (L'Analyse de l'Histogramme)
+"La distribution des prix au 
+ montre une forte concentration autour de la médiane de [Insérez votre chiffre] €. On observe une 'longue traîne' vers la droite, indiquant un segment de marché 'Luxe' minoritaire mais bien présent, avec des biens dépassant les 15 000 €/
+."
+2. Corrélation Surface vs Prix (Le Nuage de Points)
+"Le nuage de points confirme une corrélation linéaire positive entre la surface et le prix total. Cependant, l'analyse montre que les petites surfaces (Appartements) présentent souvent un prix au 
+ plus élevé que les maisons de grande surface, un phénomène classique de forte demande locative urbaine."
+3. Zones de Tension (Le Top 10 des Villes)
+"Le Top 10 met en évidence une fracture territoriale nette. L'écart de prix entre la commune la plus chère ([Ville 1]) et la 10ème ([Ville 10]) est de [X]%, ce qui suggère des opportunités d'investissement dans les communes limitrophes en pleine gentrification."
+
 
 
 <img width="1360" height="636" alt="image" src="https://github.com/user-attachments/assets/676c75e4-4e33-4790-8117-03f690cf1939" />
